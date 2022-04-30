@@ -68,14 +68,6 @@ sagan_stats_check -c
                          Default: 0.75%
 -D <drop percent crit>   Percent of dropped packets to critical on.
                          Default: 1%
--e <error delta warn>    Error delta to warn on.
-                         Default: 1
--E <error delta crit>    Error delta to critical on.
-                         Default: 2
--r <error percent warn>  Percent of drop packets to warn on.
-                         Default: 0.05%
--R <error percent crit>  Percent of drop packets to warn on.
-                         Default: 0.1%
 
 -n                       Run as a nagios check style instead of LibreNMS.
 
