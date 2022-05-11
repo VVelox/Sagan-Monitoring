@@ -248,7 +248,7 @@ sub run {
 						total_delta         => $json->{stats}{captured}{total},
 						drop_delta          => $json->{stats}{captured}{drop},
 						ignore_delta        => $json->{stats}{captured}{ignore},
-						threshold_delta     => $json->{stats}{captured}{theshold},
+						threshold_delta     => $json->{stats}{captured}{threshold},
 						after_delta         => $json->{stats}{captured}{after},
 						match_delta         => $json->{stats}{captured}{match},
 						bytes_delta         => $json->{stats}{captured}{bytes_total},
