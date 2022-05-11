@@ -4,10 +4,10 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 my %WriteMakefileArgs = (
-	NAME               => 'Suricata::Monitoring',
+	NAME               => 'Sagan::Monitoring',
 	AUTHOR             => q{Zane C. Bowers-Hadley <vvelox@vvelox.net>},
-	VERSION_FROM       => 'lib/Suricata/Monitoring.pm',
-	ABSTRACT_FROM      => 'lib/Suricata/Monitoring.pm',
+	VERSION_FROM       => 'lib/Sagan/Monitoring.pm',
+	ABSTRACT_FROM      => 'lib/Sagan/Monitoring.pm',
 	LICENSE            => 'artistic_2',
 	MIN_PERL_VERSION   => '5.006',
 	INST_SCRIPT        => 'bin',
@@ -32,8 +32,8 @@ my %WriteMakefileArgs = (
 		resources   => {
 			repository => {
 				type => 'git',
-				url  => 'git@github.com:VVelox/Suricata-Monitoring.git',
-				web  => 'https://github.com/VVelox/Suricata-Monitoring',
+				url  => 'git@github.com:VVelox/Sagan-Monitoring.git',
+				web  => 'https://github.com/VVelox/Sagan-Monitoring',
 			},
 		},
 	}
