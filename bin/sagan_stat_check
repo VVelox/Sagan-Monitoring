@@ -30,7 +30,7 @@ For LibreNMS, this should be set up to run from cron and as a snmp extend.
 
 cron...
 
-*/5 * * * * /usr/local/bin/sagan_stat_check
+*/5 * * * * /usr/local/bin/sagan_stat_check -u
 
 snmp.conf...
 
@@ -341,7 +341,7 @@ if ( $mode eq 'single' ) {
 elsif ( $mode eq 'slug' ) {
 	my $dh;
 	my $found = 0;
-	opendir( $dh, $log_dir ) or die( 'Ubable to open dir "' . $log_dir . '"' );
+	opendir( $dh, $log_dir ) or die( 'Unable to open dir "' . $log_dir . '"' );
 	while ( readdir($dh) ) {
 		if ( $_ =~ /^$slug-[A-Za-z\-\_0-9]+\.[Jj][Ss][Oo][Nn]$/ ) {
 			my $instance = $_;
@@ -524,4 +524,3 @@ my $sm       = Sagan::Monitoring->new($args);
 my $returned = $sm->run;
 $sm->print_output;
 exit $returned->{alert};
-
