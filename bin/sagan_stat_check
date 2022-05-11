@@ -30,7 +30,7 @@ For LibreNMS, this should be set up to run from cron and as a snmp extend.
 
 cron...
 
-*/5 * * * * /usr/local/bin/sagan_stat_check -u
+*/5 * * * * /usr/local/bin/sagan_stat_check
 
 snmp.conf...
 
@@ -40,6 +40,10 @@ This assumes that stats-json.subtract_old_values is set to 'true'
 for Suricata.
 
 =head1 FLAGS
+
+=head2 -c
+
+Print from cache, '/var/cache/sagan_monitoring.json'.
 
 =head2 -m <mode>
 
@@ -322,7 +326,7 @@ if ($version) {
 
 # prints the cache and exists if requested
 if ($print_cache) {
-	my $cache=read_file('/var/cache/sagan-monitoring/stats.json');
+	my $cache=read_file('/var/cache/sagan_monitoring.json');
 	print $cache;
 	exit;
 }
