@@ -88,9 +88,9 @@ sub new {
 	my $self = {
 		'drop_percent_warn' => '.75',
 		'drop_percent_crit' => '1',
-				max_age             => 360,
-				mode                 => 'librenms',
-		cache=>'/var/cache/sagan_monitoring.json',
+		max_age             => 360,
+		mode                => 'librenms',
+		cache               => '/var/cache/sagan_monitoring.json',
 	};
 	bless $self;
 
@@ -262,57 +262,60 @@ sub run {
 					};
 
 					# find the drop percentages
-					if ($new_stats->{total_delta} != 0) {
-						$new_stats->{drop_percent}=($new_stats->{drop_delta} / $new_stats->{total_delta})*100;
-						$new_stats->{drop_percent}=sprintf( '%0.5f', $new_stats->{drop_percent} );
-					}else {
-						$new_stats->{total_percent}=0;
+					if ( $new_stats->{total_delta} != 0 ) {
+						$new_stats->{drop_percent} = ( $new_stats->{drop_delta} / $new_stats->{total_delta} ) * 100;
+						$new_stats->{drop_percent} = sprintf( '%0.5f', $new_stats->{drop_percent} );
 					}
-					if ($new_stats->{f_total_delta} != 0) {
-						$new_stats->{f_drop_percent}=($new_stats->{f_dropped_delta} / $new_stats->{f_total_delta})*100;
-						$new_stats->{f_drop_percent}=sprintf( '%0.5f', $new_stats->{f_drop_percent} );
-					}else {
-						$new_stats->{f_drop_percent}=0;
+					else {
+						$new_stats->{total_percent} = 0;
+					}
+					if ( $new_stats->{f_total_delta} != 0 ) {
+						$new_stats->{f_drop_percent}
+							= ( $new_stats->{f_dropped_delta} / $new_stats->{f_total_delta} ) * 100;
+						$new_stats->{f_drop_percent} = sprintf( '%0.5f', $new_stats->{f_drop_percent} );
+					}
+					else {
+						$new_stats->{f_drop_percent} = 0;
 					}
 
 					# check for drop percent alerts
 					if (   $new_stats->{drop_percent} >= $self->{drop_percent_warn}
-						   && $new_stats->{drop_percent} < $self->{drop_percent_crit} )
+						&& $new_stats->{drop_percent} < $self->{drop_percent_crit} )
 					{
 						$new_stats->{alert} = 1;
 						push( @new_alerts,
-							  $instance
-							  . ' drop_percent warning '
-							  . $new_stats->{drop_percent} . ' >= '
-							  . $self->{drop_percent_warn} );
+								  $instance
+								. ' drop_percent warning '
+								. $new_stats->{drop_percent} . ' >= '
+								. $self->{drop_percent_warn} );
 					}
 					if ( $new_stats->{drop_percent} >= $self->{drop_percent_crit} ) {
 						$new_stats->{alert} = 2;
 						push( @new_alerts,
-							  $instance
-							  . ' drop_percent critical '
-							  . $new_stats->{drop_percent} . ' >= '
-							  . $self->{drop_percent_crit} );
+								  $instance
+								. ' drop_percent critical '
+								. $new_stats->{drop_percent} . ' >= '
+								. $self->{drop_percent_crit} );
 					}
 
 					# check for f_drop percent alerts
 					if (   $new_stats->{f_drop_percent} >= $self->{drop_percent_warn}
-						   && $new_stats->{f_drop_percent} < $self->{drop_percent_crit} )
+						&& $new_stats->{f_drop_percent} < $self->{drop_percent_crit} )
 					{
 						$new_stats->{alert} = 1;
 						push( @new_alerts,
-							  $instance
-							  . ' f_drop_percent warning '
-							  . $new_stats->{f_drop_percent} . ' >= '
-							  . $self->{drop_percent_warn} );
+								  $instance
+								. ' f_drop_percent warning '
+								. $new_stats->{f_drop_percent} . ' >= '
+								. $self->{drop_percent_warn} );
 					}
 					if ( $new_stats->{f_drop_percent} >= $self->{drop_percent_crit} ) {
 						$new_stats->{alert} = 2;
 						push( @new_alerts,
-							  $instance
-							  . ' f_drop_percent critical '
-							  . $new_stats->{f_drop_percent} . ' >= '
-							  . $self->{drop_percent_crit} );
+								  $instance
+								. ' f_drop_percent critical '
+								. $new_stats->{f_drop_percent} . ' >= '
+								. $self->{drop_percent_crit} );
 					}
 
 					# add stuff to .total
@@ -341,53 +344,57 @@ sub run {
 	}
 
 	# find the drop percentages
-	if ($to_return->{data}{'.total'}{total_delta} != 0) {
-		$to_return->{data}{'.total'}{drop_percent}=($to_return->{data}{'.total'}{drop_delta} / $to_return->{data}{'.total'}{total_delta})*100;
-		$to_return->{data}{'.total'}{drop_percent}=sprintf( '%0.5f', $to_return->{data}{'.total'}{drop_percent} );
-	}else {
-		$to_return->{data}{'.total'}{drop_percent}=0;
+	if ( $to_return->{data}{'.total'}{total_delta} != 0 ) {
+		$to_return->{data}{'.total'}{drop_percent}
+			= ( $to_return->{data}{'.total'}{drop_delta} / $to_return->{data}{'.total'}{total_delta} ) * 100;
+		$to_return->{data}{'.total'}{drop_percent} = sprintf( '%0.5f', $to_return->{data}{'.total'}{drop_percent} );
 	}
-	if ($to_return->{data}{'.total'}{f_dropped_delta} != 0) {
-		$to_return->{data}{'.total'}{f_drop_percent}=($to_return->{data}{'.total'}{f_dropped_delta} / $to_return->{data}{'.total'}{f_total_delta})*100;
-		$to_return->{data}{'.total'}{f_drop_percent}=sprintf( '%0.5f', $to_return->{data}{'.total'}{f_drop_percent} );
-	}else {
-		$to_return->{data}{'.total'}{f_drop_percent}=0;
+	else {
+		$to_return->{data}{'.total'}{drop_percent} = 0;
+	}
+	if ( $to_return->{data}{'.total'}{f_dropped_delta} != 0 ) {
+		$to_return->{data}{'.total'}{f_drop_percent}
+			= ( $to_return->{data}{'.total'}{f_dropped_delta} / $to_return->{data}{'.total'}{f_total_delta} ) * 100;
+		$to_return->{data}{'.total'}{f_drop_percent} = sprintf( '%0.5f', $to_return->{data}{'.total'}{f_drop_percent} );
+	}
+	else {
+		$to_return->{data}{'.total'}{f_drop_percent} = 0;
 	}
 
 	# check for drop percent alerts
 	if (   $to_return->{data}{'.total'}{drop_percent} >= $self->{drop_percent_warn}
-		   && $to_return->{data}{'.total'}{drop_percent} < $self->{drop_percent_crit} )
+		&& $to_return->{data}{'.total'}{drop_percent} < $self->{drop_percent_crit} )
 	{
 		$to_return->{alert} = 1;
 		push( @alerts,
-			  'total drop_percent warning '
-			  . $to_return->{data}{'.total'}{drop_percent} . ' >= '
-			  . $self->{drop_percent_warn} );
+				  'total drop_percent warning '
+				. $to_return->{data}{'.total'}{drop_percent} . ' >= '
+				. $self->{drop_percent_warn} );
 	}
 	if ( $to_return->{data}{'.total'}{drop_percent} >= $self->{drop_percent_crit} ) {
 		$to_return->{alert} = 2;
 		push( @alerts,
-			  'total drop_percent critical '
-			  . $to_return->{data}{'.total'}{drop_percent} . ' >= '
-			  . $self->{drop_percent_crit} );
+				  'total drop_percent critical '
+				. $to_return->{data}{'.total'}{drop_percent} . ' >= '
+				. $self->{drop_percent_crit} );
 	}
 
 	# check for f_drop percent alerts
 	if (   $to_return->{data}{'.total'}{f_drop_percent} >= $self->{drop_percent_warn}
-		   && $to_return->{data}{'.total'}{f_drop_percent} < $self->{drop_percent_crit} )
+		&& $to_return->{data}{'.total'}{f_drop_percent} < $self->{drop_percent_crit} )
 	{
 		$to_return->{alert} = 1;
 		push( @alerts,
-			  'total f_drop_percent warning '
-			  . $to_return->{data}{'.total'}{f_drop_percent} . ' >= '
-			  . $self->{drop_percent_warn} );
+				  'total f_drop_percent warning '
+				. $to_return->{data}{'.total'}{f_drop_percent} . ' >= '
+				. $self->{drop_percent_warn} );
 	}
 	if ( $to_return->{data}{'.total'}{f_drop_percent} >= $self->{drop_percent_crit} ) {
 		$to_return->{alert} = 2;
 		push( @alerts,
-			  'total f_drop_percent critical '
-			  . $to_return->{data}{'.total'}{f_drop_percent} . ' >= '
-			  . $self->{drop_percent_crit} );
+				  'total f_drop_percent critical '
+				. $to_return->{data}{'.total'}{f_drop_percent} . ' >= '
+				. $self->{drop_percent_crit} );
 	}
 
 	# join any found alerts into the string
@@ -396,8 +403,8 @@ sub run {
 
 	# write the cache file on out
 	eval {
-		my $json = JSON->new->utf8->canonical(1);
-		my $new_cache = $json->encode($self->{results})."\n";
+		my $json      = JSON->new->utf8->canonical(1);
+		my $new_cache = $json->encode($to_return) . "\n";
 		open( my $fh, '>', $self->{cache} );
 		print $fh $new_cache . "\n";
 		close($fh);
@@ -453,7 +460,7 @@ sub print_output {
 	}
 	else {
 		my $json = JSON->new->utf8->canonical(1);
-		print $json->encode($self->{results})."\n";
+		print $json->encode( $self->{results} ) . "\n";
 	}
 }
 
