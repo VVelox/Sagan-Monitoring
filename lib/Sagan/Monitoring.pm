@@ -51,6 +51,9 @@ The args are taken as a hash ref. The keys are documented as below.
 
 The only must have is 'files'.
 
+This assumes that stats-json.subtract_old_values is set to 'true'
+for Suricata.
+
     - drop_percent_warn :: Drop percent warning threshold.
       - Default :: .75;
 	

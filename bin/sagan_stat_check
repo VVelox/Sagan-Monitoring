@@ -36,6 +36,9 @@ snmp.conf...
 
 extend sagan-stats /usr/local/bin/sagan_stat_check -c
 
+This assumes that stats-json.subtract_old_values is set to 'true'
+for Suricata.
+
 =head1 FLAGS
 
 =head2 -m <mode>
