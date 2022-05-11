@@ -269,7 +269,7 @@ sub run {
 						$new_stats->{total_percent}=0;
 					}
 					if ($new_stats->{f_total_delta} != 0) {
-						$new_stats->{f_drop_percent}=($new_stats->{f_drop_delta} / $new_stats->{f_total_delta})*100;
+						$new_stats->{f_drop_percent}=($new_stats->{f_dropped_delta} / $new_stats->{f_total_delta})*100;
 						$new_stats->{f_drop_percent}=sprintf( '%0.5f', $new_stats->{f_drop_percent} );
 					}else {
 						$new_stats->{f_drop_percent}=0;
@@ -347,8 +347,8 @@ sub run {
 	}else {
 		$to_return->{data}{'.total'}{drop_percent}=0;
 	}
-	if ($to_return->{data}{'.total'}{f_drop_delta} != 0) {
-		$to_return->{data}{'.total'}{f_drop_percent}=($to_return->{data}{'.total'}{f_drop_delta} / $to_return->{data}{'.total'}{f_total_delta})*100;
+	if ($to_return->{data}{'.total'}{f_dropped_delta} != 0) {
+		$to_return->{data}{'.total'}{f_drop_percent}=($to_return->{data}{'.total'}{f_dropped_delta} / $to_return->{data}{'.total'}{f_total_delta})*100;
 		$to_return->{data}{'.total'}{f_drop_percent}=sprintf( '%0.5f', $to_return->{data}{'.total'}{f_drop_percent} );
 	}else {
 		$to_return->{data}{'.total'}{f_drop_percent}=0;
