@@ -406,7 +406,7 @@ sub run {
 		my $json      = JSON->new->utf8->canonical(1);
 		my $new_cache = $json->encode($to_return) . "\n";
 		open( my $fh, '>', $self->{cache} );
-		print $fh $new_cache . "\n";
+		print $fh $new_cache;
 		close($fh);
 	};
 	if ($@) {
