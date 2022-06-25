@@ -16,11 +16,11 @@ Sagan::Monitoring - LibreNMS JSON SNMP extend and Nagios style check for Sagan s
 
 =head1 VERSION
 
-Version 0.0.1
+Version 1.0.0
 
 =cut
 
-our $VERSION = '0.0.1';
+our $VERSION = '1.0.0';
 
 =head1 SYNOPSIS
 
@@ -481,7 +481,7 @@ sub print_output {
     + $hash{'errorString'} :: A string description of the error.
     
     + $hash{'data'}{$instance} :: Values migrated from the
-      instance. * values are created via computing the difference
+      instance. Non *_percent values are created via computing the difference
       from the previously saved info. *_percent is based off of the delta
       in question over the packet delta. Delta are created for packet,
       drop, ifdrop, and error. Percents are made for drop, ifdrop, and
