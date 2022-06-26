@@ -16,11 +16,11 @@ Sagan::Monitoring - LibreNMS JSON SNMP extend and Nagios style check for Sagan s
 
 =head1 VERSION
 
-Version 1.0.0
+Version 1.0.1
 
 =cut
 
-our $VERSION = '1.0.0';
+our $VERSION = '1.0.1';
 
 =head1 SYNOPSIS
 
@@ -52,7 +52,7 @@ The args are taken as a hash ref. The keys are documented as below.
 The only must have is 'files'.
 
 This assumes that stats-json.subtract_old_values is set to 'true'
-for Suricata.
+for Sagan.
 
     - drop_percent_warn :: Drop percent warning threshold.
       - Default :: .75;
