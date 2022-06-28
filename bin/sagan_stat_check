@@ -6,15 +6,15 @@ sagan_stat_check - LibreNMS JSON SNMP extend and Nagios style check for Sagan st
 
 =head1 SYNOPSIS
 
-sagan_stats_check [B<-m> single] [B<-s> <eve>] [B<-S> <instance name>] [B<-d> <drop percent warn>]
+sagan_stats_check [B<-a> <age>] [B<-m> single] [B<-s> <eve>] [B<-S> <instance name>] [B<-d> <drop percent warn>]
 [B<-D> <drop percent crit>]  [B<-e> <error delta warn>] [B<-E> <error delta crit>]
 [B<-r> <error percent warn>] [B<-r> <error percent crit>]
 
-sagan_stats_check B<-m> slug [B<-s> <slug>] [B<-l> <log dir>]  [B<-d> <drop percent warn>]
+sagan_stats_check [B<-a> <age>] B<-m> slug [B<-s> <slug>] [B<-l> <log dir>]  [B<-d> <drop percent warn>]
 [B<-D> <drop percent crit>]  [B<-e> <error delta warn>] [B<-E> <error delta crit>]
 [B<-r> <error percent warn>] [B<-r> <error percent crit>]
 
-sagan_stats_check B<-m> manual B<-1> <manual>  [B<-d> <drop percent warn>]
+sagan_stats_check [B<-a> <age>] B<-m> manual B<-1> <manual>  [B<-d> <drop percent warn>]
 [B<-D> <drop percent crit>]  [B<-e> <error delta warn>] [B<-E> <error delta crit>]
 [B<-r> <error percent warn>] [B<-r> <error percent crit>] [B<-2> <manual>] [B<-3> <manual>]
 [B<-4> <manual>] [B<-5> <manual>] [B<-6> <manual>] [B<-7> <manual>]
@@ -40,6 +40,12 @@ This assumes that stats-json.subtract_old_values is set to 'true'
 for Sagan.
 
 =head1 FLAGS
+
+=head2 -a <age>
+
+How far back to read in the log in seconds.
+
+Default: 360
 
 =head2 -c
 
