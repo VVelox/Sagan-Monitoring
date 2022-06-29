@@ -187,7 +187,7 @@ use File::Slurp;
 use Sagan::Monitoring;
 
 sub version {
-	print "sagan_stat_check v. 0.0.1\n";
+	print "sagan_stat_check v. 0.1.0\n";
 }
 
 sub help {
