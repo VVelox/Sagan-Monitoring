@@ -289,9 +289,10 @@ my $instance_7;
 my $instance_8;
 my $instance_9;
 my $nagios;
-my $drop_percent_warn  = '.75';
-my $drop_percent_crit  = '1';
+my $drop_percent_warn = '.75';
+my $drop_percent_crit = '1';
 my $print_cache;
+my $max_age;
 Getopt::Long::Configure('no_ignore_case');
 Getopt::Long::Configure('bundling');
 GetOptions(
@@ -318,6 +319,7 @@ GetOptions(
 	'd=s'     => \$drop_percent_warn,
 	'D=s'     => \$drop_percent_crit,
 	'c'       => \$print_cache,
+	'a=s'     => \$max_age,
 );
 
 # print version or help if requested
@@ -332,7 +334,7 @@ if ($version) {
 
 # prints the cache and exists if requested
 if ($print_cache) {
-	my $cache=read_file('/var/cache/sagan_monitoring.json');
+	my $cache = read_file('/var/cache/sagan_monitoring.json');
 	print $cache;
 	exit;
 }
@@ -523,10 +525,11 @@ else {
 
 # put together the args hash
 my $args = {
-	mode               => 'librenms',
-	drop_percent_warn  => $drop_percent_warn,
-	drop_percent_crit  => $drop_percent_crit,
-	files              => $instances,
+	mode              => 'librenms',
+	drop_percent_warn => $drop_percent_warn,
+	drop_percent_crit => $drop_percent_crit,
+	files             => $instances,
+	max_age           => $max_age,
 };
 
 if ($nagios) {
