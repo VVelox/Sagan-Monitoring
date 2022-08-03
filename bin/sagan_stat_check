@@ -17,7 +17,7 @@ sagan_stats_check [B<-a> <age>] B<-m> manual B<-1> <manual>  [B<-d> <drop percen
 [B<-2> <manual>] [B<-3> <manual>] [B<-4> <manual>] [B<-5> <manual>] [B<-6> <manual>]
 [B<-7> <manual>] [B<-8> <manual>] [B<-9> <manual>] [B<-0> <manual>]
 
-sagan_stats_check -c
+sagan_stats_check -c [B<-b>]
 
 =head1 DESCRIPTION
 
@@ -47,6 +47,10 @@ Default: 360
 =head2 -c
 
 Print from cache, '/var/cache/sagan_monitoring.json'.
+
+=head2 -b
+
+When used with B<-c>, the output will be compressed via base64+gzip.
 
 =head2 -m <mode>
 
@@ -220,6 +224,8 @@ sub help {
 -0 <manual>              A file to use in manual mode.
 
 -c                       Print the cache and exit.
+
+-b                       base64+gzip the output from -c
 
 -d <drop percent warn>   Percent of drop packets to warn on.
                          Default: 0.75%
